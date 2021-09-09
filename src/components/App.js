@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import LogIn from './LogIn.js';
-import Register from './Register.js';
+import SignUp from './SignUp.js';
 import Today from './Today.js';
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
           <LogIn />
         </Route>
         <Route path="/cadastro">
-          <Register />
+          <SignUp />
         </Route>
         <Route path="/habitos">
           <Today />
