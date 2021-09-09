@@ -7,6 +7,8 @@ const Image = styled.img`
 `;
 
 const Container = styled.main`
+    width: 100%;
+    height: 100vh;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
