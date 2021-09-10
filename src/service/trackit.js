@@ -22,13 +22,25 @@ function getHabits (token, setHabitsList) {
     }
 
     axios.get(`${BASE_URL}/habits`, config)
-        //.then((response) => setHabitsList(response.data))
         .then((response) => setHabitsList(response.data))
         .catch(() => alert("Ocorreu algum erro!"));
+}
+
+function sendHabitToServer (token, newHabit, treatSuccess, treatError) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    axios.post(`${BASE_URL}/habits`, newHabit, config)
+        .then(treatSuccess)
+        .catch(treatError);
 }
 
 export {
     logInTry,
     sendSignUpToServer,
     getHabits,
+    sendHabitToServer,
 }

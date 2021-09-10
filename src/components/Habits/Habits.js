@@ -18,7 +18,7 @@ export default function Habits () {
     return (
         <>
             <Title setCreatingHabit={setCreatingHabit} />
-            {creatingHabit ? <CreateHabit setCreatingHabit={setCreatingHabit} /> :""}
+            {creatingHabit ? <CreateHabit setCreatingHabit={setCreatingHabit} setHabitsList={setHabitsList} /> :""}
             {habitsList.length > 0 ? <HabitsList list={habitsList} />:<NoCreatedHabit />}
         </>
     );
