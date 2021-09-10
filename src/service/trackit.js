@@ -14,7 +14,21 @@ function sendSignUpToServer (body, treatSuccess, treatError) {
         .catch(treatError);
 }
 
+function getHabits (token, setHabitsList) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    axios.get(`${BASE_URL}/habits`, config)
+        //.then((response) => setHabitsList(response.data))
+        .then((response) => setHabitsList(response.data))
+        .catch(() => alert("Ocorreu algum erro!"));
+}
+
 export {
     logInTry,
     sendSignUpToServer,
+    getHabits,
 }
