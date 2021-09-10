@@ -9,6 +9,10 @@ const Button = styled.button`
     font-size: 25px;
     color: #ffffff;
     font-weight: 400;
+
+    :disabled {
+        opacity: 0.7;
+    }
 `;
 
 export {

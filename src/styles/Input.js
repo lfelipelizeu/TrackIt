@@ -14,6 +14,11 @@ const Input = styled.input`
     ::placeholder {
         color: #DBDBDB;
     }
+
+    :disabled {
+        background-color: #f2f2f2;
+        color: #afafaf;
+    }
 `;
 
 export {
