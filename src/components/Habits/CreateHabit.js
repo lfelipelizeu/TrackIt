@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Button } from '../styles/Button.js';
-import { Input } from '../styles/Input.js';
+import { Button } from '../../styles/Button.js';
+import { Input } from '../../styles/Input.js';
 
 export default function CreateHabit ({ setCreatingHabit }) {
     const weekdays = ["D","S","T","Q","Q","S","S"];

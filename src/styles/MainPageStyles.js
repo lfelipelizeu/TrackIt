@@ -4,7 +4,7 @@ const PageTitle = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
     font-size: 25px;
     color: #126BA5;
     letter-spacing: 0.02em;

@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Today from './Today.js';
-import Habits from './Habits.js';
+import Habits from './Habits/Habits.js';
 import History from './History.js';
 
 export default function MainPage () {
@@ -36,7 +36,7 @@ const Container = styled.section`
 
     button {
         width: auto !important;
-        height: auto !important;
+        height: 100% !important;
         padding: 0 10px;
     }
 `;

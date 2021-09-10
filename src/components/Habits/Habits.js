@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Button } from '../styles/Button.js';
-import { PageTitle, Warning } from '../styles/MainPageStyles.js';
+import { Button } from '../../styles/Button.js';
+import { PageTitle, Warning } from '../../styles/MainPageStyles.js';
 import CreateHabit from './CreateHabit.js';
 
 export default function Habits () {
