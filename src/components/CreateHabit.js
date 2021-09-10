@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '../styles/Button.js';
 import { Input } from '../styles/Input.js';
 
-export default function CreateHabit () {
+export default function CreateHabit ({ setCreatingHabit }) {
     const weekdays = ["D","S","T","Q","Q","S","S"];
 
     return (
@@ -12,7 +12,7 @@ export default function CreateHabit () {
             <Weekdays>
                 {weekdays.map((weekday, index) => <Weekday key={index} day={weekday} />)}
             </Weekdays>
-            <Buttons />
+            <Buttons setCreatingHabit={setCreatingHabit} />
         </Box>
     );
 }
@@ -25,14 +25,14 @@ function Weekday ({ day }) {
     }
 
     return (
-        <Day selected={selected} onClick={() => selectDay()}>{day}</Day>
+        <Day selected={selected} onClick={selectDay}>{day}</Day>
     );
 }
 
-function Buttons () {
+function Buttons ({ setCreatingHabit }) {
     return (
         <ButtonsBox>
-            <CancelButton>Cancelar</CancelButton>
+            <CancelButton onClick={() => setCreatingHabit(false)}>Cancelar</CancelButton>
             <Button>Salvar</Button>
         </ButtonsBox>
     );
