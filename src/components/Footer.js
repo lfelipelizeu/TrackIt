@@ -27,6 +27,7 @@ const Bottom = styled.footer`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 1;
 
     a {
         font-size: 23px;

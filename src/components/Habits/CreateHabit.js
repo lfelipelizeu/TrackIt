@@ -17,26 +17,24 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
 
     function treatSuccess () {
         setCreatingHabit(false);
+        setNewHabit({name: "", days: []});
         getHabits(user.token, setHabitsList);
     }
 
-    function treatError () {
+    function treatError (error) {
+        console.log(error.response);
         alert("Ocorreu algum erro! Tente novamente.");
         setDisable(false);
     }
 
     function createHabit () {
-        if (newHabit.name === "") {
-            alert("Digite um nome para identificar seu hábito!");
-            setDisable(false);
-        } else if (newHabit.days.length === 0) {
-            alert("Escolha os dias para praticar o hábito!");
-            setDisable(false);
-        } else {
-            setDisable(true);
-            setNewHabit({name: "", days: []});
-            sendHabitToServer(user.token, newHabit, treatSuccess, treatError);
-        }
+        const body = {
+            name: habitName,
+            days: selectedDays
+        };
+        
+        setDisable(true);
+        sendHabitToServer(user.token, body, treatSuccess, treatError);
     }
 
     function cancelCreation () {

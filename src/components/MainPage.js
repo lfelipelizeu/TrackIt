@@ -29,10 +29,11 @@ export default function MainPage () {
 }
 
 const Container = styled.section`
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: #F2F2F2;
-    padding: 90px 15px;
+    padding: 90px 15px 120px;
+    overflow: scroll;
 
     button {
         width: auto !important;

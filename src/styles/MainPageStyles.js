@@ -13,8 +13,11 @@ const PageTitle = styled.div`
 
 const HabitBox = styled.div`
     width: 100%;
-    height: 100px;
-    background-color: red;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
 `;
 
 const Warning = styled.p`
