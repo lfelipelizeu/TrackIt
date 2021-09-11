@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 import Header from './Header.js';
 import Footer from './Footer.js';
-import Today from './Today.js';
+import Today from './Today/Today.js';
 import Habits from './Habits/Habits.js';
 import History from './History.js';
 

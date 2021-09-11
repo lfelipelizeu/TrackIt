@@ -22,7 +22,6 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
     }
 
     function treatError (error) {
-        console.log(error.response);
         alert("Ocorreu algum erro! Tente novamente.");
         setDisable(false);
     }
