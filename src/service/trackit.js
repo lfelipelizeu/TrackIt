@@ -19,7 +19,7 @@ function getHabits (token, setHabitsList) {
         headers: {
             "Authorization": `Bearer ${token}`
         }
-    }
+    };
 
     axios.get(`${BASE_URL}/habits`, config)
         .then((response) => setHabitsList(response.data))
@@ -31,11 +31,23 @@ function sendHabitToServer (token, newHabit, treatSuccess, treatError) {
         headers: {
             "Authorization": `Bearer ${token}`
         }
-    }
+    };
 
     axios.post(`${BASE_URL}/habits`, newHabit, config)
         .then(treatSuccess)
         .catch(treatError);
+}
+
+function deleteHabit (id, token, treatSuccess) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+
+    axios.delete(`${BASE_URL}/habits/${id}`, config)
+        .then(treatSuccess)
+        .catch(() => alert("Ocorreu algum erro! Tente novamente."));
 }
 
 export {
@@ -43,4 +55,5 @@ export {
     sendSignUpToServer,
     getHabits,
     sendHabitToServer,
+    deleteHabit,
 }

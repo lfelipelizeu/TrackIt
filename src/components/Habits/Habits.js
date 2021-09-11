@@ -21,7 +21,7 @@ export default function Habits () {
         <CreateHabitContext.Provider value={{ newHabit, setNewHabit }}>
             <Title setCreatingHabit={setCreatingHabit} />
             {creatingHabit ? <CreateHabit setCreatingHabit={setCreatingHabit} setHabitsList={setHabitsList} /> :""}
-            {habitsList.length > 0 ? <HabitsList list={habitsList} />:<NoCreatedHabit />}
+            {habitsList.length > 0 ? <HabitsList token={user.token} list={habitsList} setHabitsList={setHabitsList} />:<NoCreatedHabit />}
         </CreateHabitContext.Provider>
     );
 }

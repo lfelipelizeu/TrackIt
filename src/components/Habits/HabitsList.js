@@ -1,23 +1,37 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
+import UserContext from '../../contexts/UserContext.js';
+import { deleteHabit, getHabits } from '../../service/trackit.js';
 import { HabitBox } from '../../styles/MainPageStyles.js';
 import TrashIcon from '../../assets/icons/trash-outline.svg';
 
-export default function HabitsList ({ list }) {
+export default function HabitsList ({ list, setHabitsList }) {
     return (
         <>
-            {list.map((item,index) => <Habit key={index} habit={item} />)}
+            {list.map((item,index) => <Habit key={index} setHabitsList={setHabitsList} habit={item} />)}
         </>
     );
 }
 
-function Habit ({ habit }) {
-    const { name, days } = habit;
+function Habit ({ habit, setHabitsList }) {
+    const { id, name, days } = habit;
     const weekdays = ["D","S","T","Q","Q","S","S"];
+    const { user } = useContext(UserContext);
+
+    function treatSuccess () {
+        getHabits(user.token, setHabitsList);
+    }
+
+    function deleteThisHabit (id, name) {
+        if (window.confirm(`Deseja deletar o hábito '${name}'?`)) {
+            deleteHabit(id, user.token, treatSuccess);
+        }
+    }
 
     return (
         <HabitBox>
             <Name>{name}</Name>
-            <TrashCan src={TrashIcon} />
+            <TrashCan src={TrashIcon} onClick={() => deleteThisHabit(id, name)} />
             <Weekdays>
                 {weekdays.map((day,index) => <Day key={index} selected={days.includes(index)}>{day}</Day>)}
             </Weekdays>
