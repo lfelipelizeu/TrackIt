@@ -2,15 +2,17 @@ import styled from 'styled-components';
 import { sendHabitToServer, getHabits } from '../../service/trackit.js';
 import { useState, useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
+import CreateHabitContext from '../../contexts/CreateHabitContext.js';
 import { Button } from '../../styles/Button.js';
 import { Input } from '../../styles/Input.js';
 import Loader from "react-loader-spinner";
 
 export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
     const { user } = useContext(UserContext);
+    const { newHabit, setNewHabit } = useContext(CreateHabitContext);
     const weekdays = ["D","S","T","Q","Q","S","S"];
-    const [habitName, setHabitName] = useState("");
-    const [selectedDays, setSelectedDays] = useState([]);
+    const [habitName, setHabitName] = useState(newHabit.name);
+    const [selectedDays, setSelectedDays] = useState(newHabit.days);
     const [disable, setDisable] = useState(false);
 
     function treatSuccess () {
@@ -24,11 +26,6 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
     }
 
     function createHabit () {
-        const newHabit = {
-            name: habitName,
-            days: selectedDays
-        }
-
         if (newHabit.name === "") {
             alert("Digite um nome para identificar seu hábito!");
             setDisable(false);
@@ -37,8 +34,17 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
             setDisable(false);
         } else {
             setDisable(true);
+            setNewHabit({name: "", days: []});
             sendHabitToServer(user.token, newHabit, treatSuccess, treatError);
         }
+    }
+
+    function cancelCreation () {
+        setNewHabit({
+            name: habitName,
+            days: selectedDays
+        });
+        setCreatingHabit(false);
     }
 
     return (
@@ -57,7 +63,7 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
             </Weekdays>
             <Buttons
                 createHabit={createHabit}
-                setCreatingHabit={setCreatingHabit}
+                cancelCreation={cancelCreation}
                 disable={disable}
             />
         </Box>
@@ -77,10 +83,10 @@ function Weekday ({ id, day, selectedDays, setSelectedDays, disable }) {
     );
 }
 
-function Buttons ({ createHabit, setCreatingHabit, disable }) {
+function Buttons ({ createHabit, cancelCreation, disable }) {
     return (
         <ButtonsBox>
-            <CancelButton onClick={() => setCreatingHabit(false)} disabled={disable}>Cancelar</CancelButton>
+            <CancelButton onClick={cancelCreation} disabled={disable}>Cancelar</CancelButton>
             <Button onClick={createHabit} disabled={disable}>{disable ? <Loader type="ThreeDots" height={35} width={50} color="#ffffff" />:"Salvar"}</Button>
         </ButtonsBox>
     );
