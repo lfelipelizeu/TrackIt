@@ -1,13 +1,16 @@
 import styled from 'styled-components';
+
 import { useContext, useEffect } from 'react';
 import { getTodayHabits } from '../../service/trackit.js';
+
 import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
 import UserContext from '../../contexts/UserContext.js';
+
 import TodayHabits from './TodayHabits.js';
 import HabitsCounter from './HabitsCounter.js';
+import Loading from '../Loading.js';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
-import Loading from '../Loading.js';
 
 export default function Today () {
     const { user } = useContext(UserContext);

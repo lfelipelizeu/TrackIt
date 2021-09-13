@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { useContext } from 'react';
+
 import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
 
 export default function HabitsCounter () {
