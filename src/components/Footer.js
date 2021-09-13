@@ -17,7 +17,7 @@ export default function Footer () {
             <Link to="/hoje">
                 <CircularButton>
                     <CircularProgressbar
-                        value={habitsDone.length/todayHabitsList.length}
+                        value={habitsDone.length === 0 ? 0:habitsDone.length/todayHabitsList.length}
                         maxValue={1}
                         text={`Hoje`}
                         styles={{
