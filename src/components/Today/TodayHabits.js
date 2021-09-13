@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { getTodayHabits, checkTodayHabit, uncheckTodayHabit } from '../../service/trackit.js';
-import { useState, useEffect, useContext } from 'react';
+import { getTodayHabits, checkTodayHabit } from '../../service/trackit.js';
+import { useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
+import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
 
 export default function TodayHabits () {
     const { user } = useContext(UserContext);
-    const [todayHabitsList, setTodayHabitsList] = useState([]);
+    const { todayHabitsList, setTodayHabitsList } = useContext(TodayHabitsListContext);
 
     useEffect(() => {
         getTodayHabits(user.token, setTodayHabitsList);
