@@ -35,7 +35,9 @@ export default function LogIn () {
         setDisable(false);
     }
 
-    function logIn () {
+    function logIn (event) {
+        event.preventDefault();
+        
         const user = {
             email,
             password
@@ -49,9 +51,11 @@ export default function LogIn () {
     return (
         <Container>
             <Image src={Logo} />
-            <Input disabled={disable} type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input disabled={disable} type="password" placeholder="senha" alue={password} onChange={(e) => setPassword(e.target.value)} />
-            <Button onClick={logIn} disabled={disable}>{disable ? <Loader type="ThreeDots" height={45} color="#ffffff" />:"Entrar"}</Button>
+            <form onSubmit={logIn}>
+                <Input disabled={disable} type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input disabled={disable} type="password" placeholder="senha" alue={password} onChange={(e) => setPassword(e.target.value)} required />
+                <Button type="submit" disabled={disable}>{disable ? <Loader type="ThreeDots" height={45} color="#ffffff" />:"Entrar"}</Button>
+            </form>
             <Link to='/cadastro'>
                 Não tem uma conta? Cadastre-se!
             </Link>

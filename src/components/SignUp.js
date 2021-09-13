@@ -36,7 +36,9 @@ export default function SignUp () {
         setDisable(false);
     }
 
-    function signUp () {
+    function signUp (event) {
+        event.preventDefault();
+
         const body = {
             email,
             password,
@@ -45,18 +47,19 @@ export default function SignUp () {
         }
 
         setDisable(true);
-
         sendSignUpToServer(body, treatSuccess, treatError);
     }
 
     return (
         <Container>
             <Image src={Logo} />
-            <Input disabled={disable} type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input disabled={disable} type="password" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <Input disabled={disable} type="text" placeholder="nome" value={name} onChange={(e) => setName(e.target.value)} />
-            <Input disabled={disable} type="url" placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)}/>
-            <Button onClick={signUp} disabled={disable}>{disable ? <Loader type="ThreeDots" height={45} color="#ffffff" />:"Cadastrar"}</Button>
+            <form onSubmit={signUp}>
+                <Input disabled={disable} type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input disabled={disable} type="password" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <Input disabled={disable} type="text" placeholder="nome" value={name} onChange={(e) => setName(e.target.value)} required />
+                <Input disabled={disable} type="url" placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)} required />
+                <Button type="submit" disabled={disable}>{disable ? <Loader type="ThreeDots" height={45} color="#ffffff" />:"Cadastrar"}</Button>
+            </form>
             <Link to='/'>
                 Já tem uma conta? Faça login!
             </Link>

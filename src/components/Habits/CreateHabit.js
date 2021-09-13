@@ -26,7 +26,9 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
         setDisable(false);
     }
 
-    function createHabit () {
+    function createHabit (event) {
+        event.preventDefault();
+
         const body = {
             name: habitName,
             days: selectedDays
@@ -46,23 +48,24 @@ export default function CreateHabit ({ setCreatingHabit, setHabitsList }) {
 
     return (
         <Box>
-            <Input type="text" placeholder="nome do hábito" value={habitName} onChange={(e) => setHabitName(e.target.value)} disabled={disable} />
-            <Weekdays>
-                {weekdays.map((weekday, index) => 
-                    <Weekday
-                        key={index}
-                        id={index}
-                        day={weekday}
-                        selectedDays={selectedDays}
-                        setSelectedDays={setSelectedDays}
-                        disable={disable}
-                    />)}
-            </Weekdays>
-            <Buttons
-                createHabit={createHabit}
-                cancelCreation={cancelCreation}
-                disable={disable}
-            />
+            <form onSubmit={createHabit}>
+                <Input type="text" placeholder="nome do hábito" value={habitName} onChange={(e) => setHabitName(e.target.value)} disabled={disable} required />
+                <Weekdays>
+                    {weekdays.map((weekday, index) => 
+                        <Weekday
+                            key={index}
+                            id={index}
+                            day={weekday}
+                            selectedDays={selectedDays}
+                            setSelectedDays={setSelectedDays}
+                            disable={disable}
+                        />)}
+                </Weekdays>
+                <Buttons
+                    cancelCreation={cancelCreation}
+                    disable={disable}
+                />
+            </form>
         </Box>
     );
 }
@@ -84,7 +87,7 @@ function Buttons ({ createHabit, cancelCreation, disable }) {
     return (
         <ButtonsBox>
             <CancelButton onClick={cancelCreation} disabled={disable}>Cancelar</CancelButton>
-            <Button onClick={createHabit} disabled={disable}>{disable ? <Loader type="ThreeDots" height={35} width={50} color="#ffffff" />:"Salvar"}</Button>
+            <Button type="submit" disabled={disable}>{disable ? <Loader type="ThreeDots" height={35} width={50} color="#ffffff" />:"Salvar"}</Button>
         </ButtonsBox>
     );
 }
