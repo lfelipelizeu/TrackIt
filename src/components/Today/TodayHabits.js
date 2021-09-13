@@ -1,21 +1,17 @@
 import styled from 'styled-components';
 import { Warning } from '../../styles/MainPageStyles.js';
 import { getTodayHabits, checkTodayHabit } from '../../service/trackit.js';
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
 
 export default function TodayHabits () {
     const { user } = useContext(UserContext);
-    const { todayHabitsList, setTodayHabitsList } = useContext(TodayHabitsListContext);
-
-    useEffect(() => {
-        getTodayHabits(user.token, setTodayHabitsList);
-    },[]);
+    const { todayHabitsList } = useContext(TodayHabitsListContext);
 
     return (
         <>
-            {todayHabitsList.length > 0 ? todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} token={user.token} todayHabit={todayHabit} setTodayHabitsList={setTodayHabitsList} />):<NoTodayHabit />}
+            {todayHabitsList.length > 0 ? todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} token={user.token} todayHabit={todayHabit} />):<NoTodayHabit />}
         </>
     );
 }
@@ -26,8 +22,9 @@ function NoTodayHabit () {
     );
 }
 
-function TodayHabit ({ token, todayHabit, setTodayHabitsList}) {
+function TodayHabit ({ token, todayHabit }) {
     const { id, name, done, currentSequence, highestSequence } = todayHabit;
+    const { setTodayHabitsList } = useContext(TodayHabitsListContext);
 
     function treatSuccess () {
         getTodayHabits(token, setTodayHabitsList);

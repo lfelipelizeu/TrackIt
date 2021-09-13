@@ -3,14 +3,15 @@ import UserContext from '../../contexts/UserContext.js';
 import CreateHabitContext from '../../contexts/CreateHabitContext.js';
 import { getHabits } from '../../service/trackit.js';
 import { Button } from '../../styles/Button.js';
-import { PageTitle, Warning } from '../../styles/MainPageStyles.js';
+import { PageTitle } from '../../styles/MainPageStyles.js';
 import CreateHabit from './CreateHabit.js';
 import HabitsList from './HabitsList.js';
+import Loading from '../Loading.js';
 
 export default function Habits () {
     const { user } = useContext(UserContext);
     const [creatingHabit, setCreatingHabit] = useState(false);
-    const [habitsList, setHabitsList] = useState([]);
+    const [habitsList, setHabitsList] = useState(null);
     const [newHabit, setNewHabit] = useState({name: "", days: []});
 
     useEffect(() => {
@@ -21,7 +22,7 @@ export default function Habits () {
         <CreateHabitContext.Provider value={{ newHabit, setNewHabit }}>
             <Title setCreatingHabit={setCreatingHabit} />
             {creatingHabit ? <CreateHabit setCreatingHabit={setCreatingHabit} setHabitsList={setHabitsList} /> :""}
-            {habitsList.length > 0 ? <HabitsList token={user.token} list={habitsList} setHabitsList={setHabitsList} />:<NoCreatedHabit />}
+            {habitsList === null ? <Loading />:<HabitsList token={user.token} list={habitsList} setHabitsList={setHabitsList} />}
         </CreateHabitContext.Provider>
     );
 }
@@ -36,13 +37,5 @@ function Title ({ setCreatingHabit }) {
             Meus hábitos
             <Button onClick={createHabit}>+</Button>
         </PageTitle>
-    );
-}
-
-function NoCreatedHabit () {
-    return (
-        <Warning>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-        </Warning>
     );
 }

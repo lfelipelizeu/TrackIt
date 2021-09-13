@@ -7,7 +7,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 export default function Footer () {
     const { todayHabitsList } = useContext(TodayHabitsListContext);
-    const habitsDone = todayHabitsList.filter((todayHabit) => todayHabit.done);
+    const habitsDone = todayHabitsList === null ? []:todayHabitsList.filter((todayHabit) => todayHabit.done);
 
     return (
         <Bottom>

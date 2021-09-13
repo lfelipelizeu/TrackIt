@@ -9,7 +9,7 @@ import Habits from './Habits/Habits.js';
 import History from './History.js';
 
 export default function MainPage () {
-    const [todayHabitsList, setTodayHabitsList] = useState([]);
+    const [todayHabitsList, setTodayHabitsList] = useState(null);
 
     return (
         <TodayHabitsListContext.Provider value={{ todayHabitsList, setTodayHabitsList }}>

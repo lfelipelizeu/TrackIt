@@ -4,7 +4,7 @@ import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
 
 export default function HabitsCounter () {
     const { todayHabitsList } = useContext(TodayHabitsListContext);
-    const habitsDone = todayHabitsList.filter((todayHabit) => todayHabit.done);
+    const habitsDone = todayHabitsList === null ? []:todayHabitsList.filter((todayHabit) => todayHabit.done);
 
     function calculatePercentage () {
         const num = habitsDone.length/todayHabitsList.length;

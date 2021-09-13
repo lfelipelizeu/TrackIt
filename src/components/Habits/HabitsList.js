@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
+import { Warning } from '../../styles/MainPageStyles.js';
 import UserContext from '../../contexts/UserContext.js';
 import { deleteHabit, getHabits } from '../../service/trackit.js';
 import { HabitBox } from '../../styles/MainPageStyles.js';
@@ -8,7 +9,7 @@ import TrashIcon from '../../assets/icons/trash-outline.svg';
 export default function HabitsList ({ list, setHabitsList }) {
     return (
         <>
-            {list.map((item,index) => <Habit key={index} setHabitsList={setHabitsList} habit={item} />)}
+            {list.length > 0 ? list.map((item,index) => <Habit key={index} setHabitsList={setHabitsList} habit={item} />):<NoCreatedHabit />}
         </>
     );
 }
@@ -36,6 +37,14 @@ function Habit ({ habit, setHabitsList }) {
                 {weekdays.map((day,index) => <Day key={index} selected={days.includes(index)}>{day}</Day>)}
             </Weekdays>
         </HabitBox>
+    );
+}
+
+function NoCreatedHabit () {
+    return (
+        <Warning>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+        </Warning>
     );
 }
 
