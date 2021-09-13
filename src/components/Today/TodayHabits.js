@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getTodayHabits, checkTodayHabit } from '../../service/trackit.js';
+import { getTodayHabits, checkTodayHabit, uncheckTodayHabit } from '../../service/trackit.js';
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 
@@ -25,15 +25,21 @@ function TodayHabit ({ token, todayHabit, setTodayHabitsList}) {
         getTodayHabits(token, setTodayHabitsList);
     }
 
+    function changeTodayHabitStatus () {
+        const type = done ? "uncheck":"check";
+
+        checkTodayHabit(id, type,token, treatSuccess);
+    }
+
     return (
         <HabitBox>
             <HabitInfo>
                 <Name>{name}</Name>
                 <p>Sequência atual: <Sequence done={done}>{`${currentSequence} ${currentSequence > 1 ? "dias":"dia"}`}</Sequence></p>
-                <p>Seu recorde: <Sequence>{`${highestSequence} ${highestSequence > 1 ? "dias":"dia"}`}</Sequence></p>
+                <p>Seu recorde: <Sequence higher={currentSequence === highestSequence}>{`${highestSequence} ${highestSequence > 1 ? "dias":"dia"}`}</Sequence></p>
             </HabitInfo>
             <CheckIcon done={done}>
-                <ion-icon name="checkbox" onClick={() => checkTodayHabit(id, token, treatSuccess)}></ion-icon>
+                <ion-icon name="checkbox" onClick={changeTodayHabitStatus}></ion-icon>
             </CheckIcon>
         </HabitBox>
     )
@@ -63,7 +69,7 @@ const Name = styled.h3`
 `;
 
 const Sequence = styled.span`
-    color: ${({ done }) => done ? "#8fc549":""};
+    color: ${({ done, higher }) => done || higher ? "#8fc549":""};
 `;
 
 const CheckIcon = styled.div`
