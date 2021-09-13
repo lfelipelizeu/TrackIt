@@ -1,14 +1,41 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import TodayHabitsListContext from '../contexts/TodayHabitsListContext.js';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Footer () {
+    const { todayHabitsList } = useContext(TodayHabitsListContext);
+    const habitsDone = todayHabitsList.filter((todayHabit) => todayHabit.done);
+
     return (
         <Bottom>
             <Link to="/habitos">
                 Hábitos
             </Link>
             <Link to="/hoje">
-                <CircularButton>Hoje</CircularButton>
+                <CircularButton>
+                    <CircularProgressbar
+                        value={habitsDone.length/todayHabitsList.length}
+                        maxValue={1}
+                        text={`Hoje`}
+                        styles={{
+                            trail: {
+                                stroke: 'transparent',
+                            },
+
+                            path: {
+                                stroke: '#ffffff',
+                            },
+
+                            text: {
+                                fontSize: '23px',
+                                fill: '#ffffff',
+                            }
+                        }}
+                    />
+                </CircularButton>
             </Link>
             <Link to="/historico">
                 Histórico
@@ -42,7 +69,5 @@ const CircularButton = styled.button`
     border-radius: 50%;
     border: none;
     background-color: #52b6ff;
-    color: #ffffff;
-    font-size: 23px;
     margin-bottom: 40px;
 `;
