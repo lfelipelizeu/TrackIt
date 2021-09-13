@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getTodayHabits } from '../../service/trackit.js';
+import { getTodayHabits, checkTodayHabit } from '../../service/trackit.js';
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 
@@ -13,22 +13,28 @@ export default function TodayHabits () {
 
     return (
         <>
-            {todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} todayHabit={todayHabit} />)}
+            {todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} token={user.token} todayHabit={todayHabit} setTodayHabitsList={setTodayHabitsList} />)}
         </>
     );
 }
 
-function TodayHabit ({ todayHabit }) {
+function TodayHabit ({ token, todayHabit, setTodayHabitsList}) {
     const { id, name, done, currentSequence, highestSequence } = todayHabit;
+
+    function treatSuccess () {
+        getTodayHabits(token, setTodayHabitsList);
+    }
 
     return (
         <HabitBox>
             <HabitInfo>
                 <Name>{name}</Name>
-                <Sequence>Sequência atual: {`${currentSequence} ${currentSequence > 1 ? "dias":"dia"}`}</Sequence>
-                <Sequence>Seu recorede: {`${highestSequence} ${highestSequence > 1 ? "dias":"dia"}`}</Sequence>
+                <p>Sequência atual: <Sequence done={done}>{`${currentSequence} ${currentSequence > 1 ? "dias":"dia"}`}</Sequence></p>
+                <p>Seu recorde: <Sequence>{`${highestSequence} ${highestSequence > 1 ? "dias":"dia"}`}</Sequence></p>
             </HabitInfo>
-            <ion-icon name="checkbox"></ion-icon>
+            <CheckIcon done={done}>
+                <ion-icon name="checkbox" onClick={() => checkTodayHabit(id, token, treatSuccess)}></ion-icon>
+            </CheckIcon>
         </HabitBox>
     )
 }
@@ -43,9 +49,9 @@ const HabitBox = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    ion-icon {
-        font-size: 70px;
-        color: #ebebeb;
+    p {
+        font-size: 13px;
+        margin-bottom: 3px;
     }
 `;
 
@@ -56,7 +62,13 @@ const Name = styled.h3`
     margin-bottom: 10px;
 `;
 
-const Sequence = styled.p`
-    font-size: 15px;
-    margin-bottom: 3px;
+const Sequence = styled.span`
+    color: ${({ done }) => done ? "#8fc549":""};
+`;
+
+const CheckIcon = styled.div`
+    ion-icon {
+        font-size: 70px;
+        color: ${({ done }) => done ? "#8fc549":"#ebebeb"};
+    }
 `;

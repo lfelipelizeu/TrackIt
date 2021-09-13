@@ -62,11 +62,26 @@ function getTodayHabits (token, setTodayHabitsList) {
         .catch(() => alert("Ocorreu algum erro! Tente novamente."));
 }
 
+function checkTodayHabit (id, token, treatSuccess) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+
+    const obj = "";
+
+    axios.post(`${BASE_URL}/habits/${id}/check`, obj, config)
+        .then(treatSuccess)
+        .catch(() => alert("Ocorreu algum erro! Tente novamente."));
+}
+
 export {
     logInTry,
     sendSignUpToServer,
     getHabits,
     sendHabitToServer,
     deleteHabit,
-    getTodayHabits
+    getTodayHabits,
+    checkTodayHabit
 }
