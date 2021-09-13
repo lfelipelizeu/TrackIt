@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Image, Container } from '../styles/InitialPage.js'
-import Logo from '../assets/images/logo.svg';
 import { Input } from '../styles/Input.js';
 import { Button } from '../styles/Button.js';
+import { Image, Container } from '../styles/InitialPage.js'
+
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { sendSignUpToServer } from '../service/trackit.js';
+
+import Logo from '../assets/images/logo.svg';
 import Loader from "react-loader-spinner";
 
 

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+
 import { Route } from 'react-router-dom';
 import { useState } from 'react';
+
 import TodayHabitsListContext from '../contexts/TodayHabitsListContext.js';
+
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Today from './Today/Today.js';

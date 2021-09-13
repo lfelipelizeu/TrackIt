@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import 'react-circular-progressbar/dist/styles.css';
+
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+
 import TodayHabitsListContext from '../contexts/TodayHabitsListContext.js';
+
 import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 export default function Footer () {
     const { todayHabitsList } = useContext(TodayHabitsListContext);

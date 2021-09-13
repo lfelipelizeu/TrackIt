@@ -1,11 +1,14 @@
-import UserContext from '../contexts/UserContext.js';
-import { Link, useHistory } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { Image, Container } from '../styles/InitialPage.js'
-import Logo from '../assets/images/logo.svg';
 import { Input } from '../styles/Input.js';
 import { Button } from '../styles/Button.js';
+import { Image, Container } from '../styles/InitialPage.js'
+
+import { Link, useHistory } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { logInTry } from '../service/trackit.js';
+
+import UserContext from '../contexts/UserContext.js';
+
+import Logo from '../assets/images/logo.svg';
 import Loader from "react-loader-spinner";
 
 export default function LogIn () {
