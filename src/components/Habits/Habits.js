@@ -1,9 +1,12 @@
+import { PageTitle } from '../../styles/MainPageStyles.js';
+import { Button } from '../../styles/Button.js';
+
 import { useState, useEffect, useContext } from 'react';
+import { getHabits } from '../../service/trackit.js';
+
 import UserContext from '../../contexts/UserContext.js';
 import CreateHabitContext from '../../contexts/CreateHabitContext.js';
-import { getHabits } from '../../service/trackit.js';
-import { Button } from '../../styles/Button.js';
-import { PageTitle } from '../../styles/MainPageStyles.js';
+
 import CreateHabit from './CreateHabit.js';
 import HabitsList from './HabitsList.js';
 import Loading from '../Loading.js';
