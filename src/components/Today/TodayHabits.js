@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Warning } from '../../styles/MainPageStyles.js';
 import { getTodayHabits, checkTodayHabit } from '../../service/trackit.js';
 import { useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
@@ -14,8 +15,14 @@ export default function TodayHabits () {
 
     return (
         <>
-            {todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} token={user.token} todayHabit={todayHabit} setTodayHabitsList={setTodayHabitsList} />)}
+            {todayHabitsList.length > 0 ? todayHabitsList.map((todayHabit, index) => <TodayHabit key={index} token={user.token} todayHabit={todayHabit} setTodayHabitsList={setTodayHabitsList} />):<NoTodayHabit />}
         </>
+    );
+}
+
+function NoTodayHabit () {
+    return (
+        <Warning>Você não tem nenhum hábito programado para hoje!</Warning>
     );
 }
 

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import TodayHabits from './TodayHabits.js';
 import HabitsCounter from './HabitsCounter.js';
-import { Warning } from '../../styles/MainPageStyles.js';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
@@ -14,7 +13,7 @@ export default function Today () {
         <>
             <PageTitle>{dayjs().format('dddd, DD/MM')}</PageTitle>
             <HabitsCounter />
-            <TodayHabits todayHabitsList={todayHabitsList} setTodayHabitsList={setTodayHabitsList} />
+            {<TodayHabits todayHabitsList={todayHabitsList} setTodayHabitsList={setTodayHabitsList} />}
         </>
     );
 }
