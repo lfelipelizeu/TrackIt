@@ -60,7 +60,7 @@ export default function SignUp () {
                 <Input disabled={disable} type="url" placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)} required />
                 <Button type="submit" disabled={disable}>{disable ? <Loader type="ThreeDots" height={45} color="#ffffff" />:"Cadastrar"}</Button>
             </form>
-            <Link to='/'>
+            <Link to={disable ? "/cadastro":"/"}>
                 Já tem uma conta? Faça login!
             </Link>
         </Container>
