@@ -35,6 +35,20 @@ export default function LogIn () {
         setDisable(false);
     }
 
+    function isSomeUserLoggedIn() {
+        const loggedUser = localStorage.getItem('loggedUser');
+    
+        if (loggedUser !== null) {
+            const user = {
+                email: JSON.parse(loggedUser).email,
+                password: JSON.parse(loggedUser).password
+            }
+            logInTry(user, treatSuccess, treatError);
+        }
+    }
+
+    isSomeUserLoggedIn();
+
     function logIn (event) {
         event.preventDefault();
         
@@ -43,8 +57,8 @@ export default function LogIn () {
             password
         }
 
+        localStorage.setItem("loggedUser", JSON.stringify(user));
         setDisable(true);
-
         logInTry(user, treatSuccess, treatError);
     }
 
