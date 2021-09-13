@@ -6,7 +6,7 @@ import Header from './Header.js';
 import Footer from './Footer.js';
 import Today from './Today/Today.js';
 import Habits from './Habits/Habits.js';
-import History from './History.js';
+import History from './History/History.js';
 
 export default function MainPage () {
     const [todayHabitsList, setTodayHabitsList] = useState(null);
