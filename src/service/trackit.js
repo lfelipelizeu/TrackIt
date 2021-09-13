@@ -69,11 +69,21 @@ function checkTodayHabit (id, type ,token, treatSuccess) {
         }
     };
 
-    const obj = "";
-
-    axios.post(`${BASE_URL}/habits/${id}/${type}`, obj, config)
+    axios.post(`${BASE_URL}/habits/${id}/${type}`, '', config)
         .then(treatSuccess)
         .catch(() => alert("Ocorreu algum erro! Tente novamente."));
+}
+
+function getDailyHabitsHistory (token, setDailyHabitsHistory) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+
+    axios.get(`${BASE_URL}/habits/history/daily`, config)
+        .then((response) => setDailyHabitsHistory(response.data))
+        .catch(() => alert("Ocorreu algum erro! Tente novamentefgd"));
 }
 
 export {
@@ -83,5 +93,6 @@ export {
     sendHabitToServer,
     deleteHabit,
     getTodayHabits,
-    checkTodayHabit
+    checkTodayHabit,
+    getDailyHabitsHistory
 }
