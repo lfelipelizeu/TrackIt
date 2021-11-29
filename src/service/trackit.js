@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit";
+const BASE_URL = "http://localhost:4000";
 
 function logInTry (user, treatSuccess, treatError) {
-    axios.post(`${BASE_URL}/auth/login`, user)
+    return axios.post(`${BASE_URL}/signin`, user)
         .then(treatSuccess)
         .catch(treatError);
 }
 
 function sendSignUpToServer (body, treatSuccess, treatError) {
-    axios.post(`${BASE_URL}/auth/sign-up`, body)
+    axios.post(`${BASE_URL}/signup`, body)
         .then(treatSuccess)
         .catch(treatError);
 }

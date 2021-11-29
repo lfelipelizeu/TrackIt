@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getTodayHabits } from '../../service/trackit.js';
 
 import TodayHabitsListContext from '../../contexts/TodayHabitsListContext.js';
@@ -15,11 +16,13 @@ import 'dayjs/locale/pt-br';
 export default function Today () {
     const { user } = useContext(UserContext);
     const { todayHabitsList, setTodayHabitsList } = useContext(TodayHabitsListContext);
+    const history = useHistory();
     dayjs.locale('pt-br');
 
     useEffect(() => {
+        if (!user) return history.push('/');
         getTodayHabits(user.token, setTodayHabitsList);
-    },[]);
+    });
 
     return (
         <>

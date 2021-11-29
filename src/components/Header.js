@@ -11,7 +11,7 @@ export default function Header () {
         <Top>
             <Title>TrackIt</Title>
             <Profile>
-                <Photo src={user.image} />
+                <Photo src={user?.image} />
             </Profile>
         </Top>
     );

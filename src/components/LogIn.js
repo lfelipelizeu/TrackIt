@@ -19,38 +19,20 @@ export default function LogIn () {
     const history = useHistory();
 
     function treatSuccess (response) {
-        setUser({
-            image: response.data.image,
-            token: response.data.token
-        });
+        const user = response.data;
+
+        setUser(user);
         history.push("/hoje");
     }
 
     function treatError (error) {
-        switch (error.response.status) {
-            case 401:
-                alert("Usuário e/ou senha inválidos!");
-                break;
-            default:
-                alert("Preencha os campos corretamente!");
-        }
+        const { status } = error.response;
 
         setDisable(false);
-    }
 
-    function isSomeUserLoggedIn() {
-        const loggedUser = localStorage.getItem('loggedUser');
-    
-        if (loggedUser !== null) {
-            const user = {
-                email: JSON.parse(loggedUser).email,
-                password: JSON.parse(loggedUser).password
-            }
-            logInTry(user, treatSuccess, treatError);
-        }
+        if (status === 401) return alert("Usuário e/ou senha inválidos!");
+        return alert("Preencha os campos corretamente!");
     }
-
-    isSomeUserLoggedIn();
 
     function logIn (event) {
         event.preventDefault();
@@ -60,7 +42,6 @@ export default function LogIn () {
             password
         }
 
-        localStorage.setItem("loggedUser", JSON.stringify(user));
         setDisable(true);
         logInTry(user, treatSuccess, treatError);
     }

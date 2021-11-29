@@ -10,7 +10,7 @@ import SignUp from './SignUp.js';
 import MainPage from './MainPage.js';
 
 export default function App() {
-  const [ user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
